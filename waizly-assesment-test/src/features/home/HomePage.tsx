@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import Header from '@/features/home/Header';
 import ListTasks from '@/features/home/ListTasks';
-import { Task } from '../../types/types';
+import { Task } from '@/types/types';
 
 const HomePage = () => {
   const [listTask, setListTask] = useState<Task[]>(() => {

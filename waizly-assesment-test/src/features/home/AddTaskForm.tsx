@@ -8,7 +8,7 @@ import { Task } from '@/types/types';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-
+import { useToast } from '@/components/ui/use-toast';
 
 const formSchema = z.object({
   title: z
@@ -26,6 +26,7 @@ interface Props {
 }
 
 const AddTaskForm = ({ handleOnOpenChange, handleAddTodoList }: Props) => {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,18 +36,18 @@ const AddTaskForm = ({ handleOnOpenChange, handleAddTodoList }: Props) => {
   });
 
   const handleOnSubmit = (values: z.infer<typeof formSchema>) => {
-    const existingData = localStorage.getItem('todo-lists');
-    const existingArray = existingData ? JSON.parse(existingData) : [];
-
-    existingArray.push(values);
-    localStorage.setItem('todo-lists', JSON.stringify(existingArray));
-
     form.reset({
       date: '',
       title: ''
     });
     handleAddTodoList(values);
     handleOnOpenChange();
+    
+    toast({
+      title: 'Successfully!',
+      description: 'Added data successfully!',
+      duration: 2500
+    });
   };
 
   return (
