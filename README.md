@@ -7,7 +7,7 @@
 - waizly-assesment-test => Todo List App, Using Next.js, Typescript, Tailwind, and Shadcn UI.
 
 ## Structure Folder
-Here is the project's structure folder.
+Here is the structure folder of the project.
 
 ```src
 ├───app         # Default feature pages by Next.js.
