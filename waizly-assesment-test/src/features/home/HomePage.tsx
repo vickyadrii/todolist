@@ -13,15 +13,7 @@ const HomePage = () => {
   });
 
   const handleAddTodoList = (data: Task) => {
-    const { title, date } = data;
-
-    setListTask([
-      ...listTask,
-      {
-        title,
-        date
-      }
-    ]);
+    setListTask([...listTask, data]);
   };
 
   useEffect(() => {
