@@ -19,8 +19,6 @@ const convertTo24HourFormat = (time) => {
     return 'Invalid Date'
   }
 
-  console.log({hours, meridiem})
-
   return `${hours.toString().padStart(2, "0")}:${minutes}:${seconds}`;
 }
 
