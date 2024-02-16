@@ -7,17 +7,17 @@ interface Students {
 export const students: Students[] = [
   {
     id: 1,
-    name: "Vicky",
-    age: 20,
+    name: 'Vicky',
+    age: 20
   },
   {
     id: 2,
-    name: "Adri",
-    age: 20,
+    name: 'Adri',
+    age: 20
   },
   {
     id: 3,
-    name: "Herd",
-    age: 23,
-  },
+    name: 'Herd',
+    age: 23
+  }
 ];
