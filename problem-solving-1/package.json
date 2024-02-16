@@ -1,0 +1,10 @@
+{
+  "name": "problem-solving-1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "vickyadrii",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
