@@ -45,3 +45,5 @@ export interface Weather {
     speed?: number;
   };
 }
+
+

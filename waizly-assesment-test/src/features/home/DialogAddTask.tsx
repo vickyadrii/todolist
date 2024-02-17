@@ -70,54 +70,52 @@ const DialogAddTask = ({ handleAddTodoList }: DialogAddTaskProps) => {
   };
 
   return (
-    <div className='px-5 pt-5'>
-      <Dialog open={isOpen} onOpenChange={handleOnOpenChange}>
-        <DialogTrigger asChild>
-          <Button size="lg" className="flex items-center gap-1">
-            <PlusIcon /> New Task
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Add To-Do List</DialogTitle>
-          </DialogHeader>
-          <DialogDescription>Add your to-do list :)</DialogDescription>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleOnSubmit)} className="flex flex-col gap-4">
-              <FormField
-                control={form.control}
-                name="title"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Title</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Input your title..." {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+    <Dialog open={isOpen} onOpenChange={handleOnOpenChange}>
+      <DialogTrigger asChild>
+        <Button size="lg" className="flex items-center gap-1">
+          <PlusIcon /> New Task
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Add To-Do List</DialogTitle>
+        </DialogHeader>
+        <DialogDescription>Add your to-do list :)</DialogDescription>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleOnSubmit)} className="flex flex-col gap-4">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Input your title..." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <FormField
-                control={form.control}
-                name="date"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Date</FormLabel>
-                    <FormControl>
-                      <Input type="date" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            <FormField
+              control={form.control}
+              name="date"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Date</FormLabel>
+                  <FormControl>
+                    <Input type="date" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-              <Button type="submit">Submit</Button>
-            </form>
-          </Form>
-        </DialogContent>
-      </Dialog>
-    </div>
+            <Button type="submit">Submit</Button>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 };
 

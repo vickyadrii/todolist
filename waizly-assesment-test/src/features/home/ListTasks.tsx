@@ -34,9 +34,11 @@ const ListTasks = ({ listTask, handleEditTodoList, handleMarkAsCompleted, remove
                       }}
                       className="w-6 h-6"
                     />
-                    <div className='flex flex-col gap-1'>
+                    <div className="flex flex-col gap-1">
                       <h2 className={`${data.is_completed ? 'line-through' : ''} text-lg`}>{data.title}</h2>
-                      <p className='text-sm font-normal text-gray-700'>{dayjs(data.date).isValid() ? dayjs(data.date).format('DD MMMM YYYY') : '-'}</p>
+                      <p className="text-sm font-normal text-gray-700">
+                        {dayjs(data.date).isValid() ? dayjs(data.date).format('DD MMMM YYYY') : '-'}
+                      </p>
                     </div>
                   </div>
                 </CardTitle>

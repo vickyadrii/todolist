@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Header from '@/features/home/Header';
 import ListTasks from '@/features/home/ListTasks';
 import { Task, Weather } from '@/types/types';
 import { useToast } from '@/components/ui/use-toast';
 import DialogAddTask from './DialogAddTask';
+import { Input } from '@/components/ui/input';
 
 interface HomePageProps {
   dataWeather: Weather;
@@ -15,6 +16,8 @@ interface HomePageProps {
 const HomePage = ({ dataWeather }: HomePageProps) => {
   const { toast } = useToast();
   const [listTask, setListTask] = useState<Task[]>([]);
+  const [keyword, setKeyword] = useState<string>('');
+  const [filteredList, setFilteredList] = useState<Task[]>(listTask);
 
   const handleAddTodoList = (data: Task) => {
     setListTask([...listTask, data]);
@@ -54,6 +57,23 @@ const HomePage = ({ dataWeather }: HomePageProps) => {
     }
   };
 
+  const handleSearch = useCallback(() => {
+    const filteredData = listTask.filter((list) => {
+      return list.title.toLowerCase().includes(keyword.toLowerCase());
+    });
+    setFilteredList(filteredData);
+  }, [listTask, keyword]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleSearch();
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [handleSearch]);
+
   useEffect(() => {
     const list = localStorage.getItem('todo-lists');
     const parsedlist = list ? JSON.parse(list) : [];
@@ -69,9 +89,12 @@ const HomePage = ({ dataWeather }: HomePageProps) => {
   return (
     <div className="max-w-7xl m-auto p-5">
       <Header dataWeather={dataWeather} />
-      <DialogAddTask handleAddTodoList={handleAddTodoList} />
+      <div className="p-5 flex items-center justify-between gap-2">
+        <DialogAddTask handleAddTodoList={handleAddTodoList} />
+        <Input type="search" onChange={(e) => setKeyword(e.target.value)} className="w-1/5 py-5" placeholder="Search..." />
+      </div>
       <ListTasks
-        listTask={listTask}
+        listTask={keyword.length > 0 ? filteredList : listTask}
         removeTodoList={removeTodoList}
         handleEditTodoList={handleEditTodoList}
         handleMarkAsCompleted={handleMarkAsCompleted}
