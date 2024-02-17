@@ -15,8 +15,8 @@ import { Button } from '@/components/ui/button';
 import { TrashIcon } from '@radix-ui/react-icons';
 
 interface DialogDeleteTaskProps {
-  removeTodoList: (id: number) => void;
-  id: number;
+  removeTodoList: (id: string) => void;
+  id: string
 }
 
 const DialogDeleteTask = ({ removeTodoList, id }: DialogDeleteTaskProps) => {

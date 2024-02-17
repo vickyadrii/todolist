@@ -2,33 +2,33 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import dayjs from 'dayjs';
 
 import { Task } from '@/types/types';
-import { Button } from '@/components/ui/button';
-import { Pencil1Icon } from '@radix-ui/react-icons';
 import DialogDeleteTask from './DialogDeleteTask';
+import DialogEditTask from './DialogEditTask';
 
 interface ListTaskProps {
   listTask: Task[];
-  removeTodoList: (id: number) => void;
+  removeTodoList: (id: string) => void;
+  handleEditTodoList: (data: Task, id: string) => void;
 }
 
-const ListTasks = ({ listTask, removeTodoList }: ListTaskProps) => {
+const ListTasks = ({ listTask, handleEditTodoList, removeTodoList }: ListTaskProps) => {
   return (
     <div className="flex flex-col gap-4 p-5">
       {listTask.length !== 0 ? (
-        listTask.map(({ title, date }, index) => (
+        listTask.map((data, index) => (
           <Card key={index}>
             <CardHeader>
-              <CardTitle>{title}</CardTitle>
-              <CardDescription>{dayjs(date).isValid() ? dayjs(date).format('DD MMMM YYYY') : '-'}</CardDescription>
+              <CardTitle>{data.title}</CardTitle>
+              <CardDescription>
+                {dayjs(data.date).isValid() ? dayjs(data.date).format('DD MMMM YYYY') : '-'}
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between">
                 <p>this is a content!</p>
                 <div className="flex items-center gap-4">
-                  <Button size="icon" variant="secondary" className="bg-green-600 hover:bg-green-700">
-                    <Pencil1Icon className="text-white" />
-                  </Button>
-                  <DialogDeleteTask removeTodoList={removeTodoList} id={index} />
+                  <DialogEditTask data={data} handleEditTodoList={handleEditTodoList} id={data.id || ''} />
+                  <DialogDeleteTask removeTodoList={removeTodoList} id={data.id || ''} />
                 </div>
               </div>
             </CardContent>
