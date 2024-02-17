@@ -16,6 +16,10 @@ const HomePage = () => {
     setListTask([...listTask, data]);
   };
 
+  const removeTodoList = (id: number) => {
+    setListTask(listTask.filter((list, index) => index !== id));
+  };
+
   useEffect(() => {
     localStorage.setItem('todo-lists', JSON.stringify(listTask));
   }, [listTask]);
@@ -25,7 +29,7 @@ const HomePage = () => {
   return (
     <div className="max-w-7xl m-auto p-5">
       <Header handleAddTodoList={handleAddTodoList} />
-      <ListTasks listTask={listTask} />
+      <ListTasks listTask={listTask} removeTodoList={removeTodoList} />
     </div>
   );
 };
