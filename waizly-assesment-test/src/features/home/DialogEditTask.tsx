@@ -39,7 +39,7 @@ interface DialogEditTaskProps {
 const DialogEditTask = ({ data, handleEditTodoList, id }: DialogEditTaskProps) => {
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [dataTask, setDataTask] = useState<Task>(data); // Memelihara dataTask
+  const [dataTask, setDataTask] = useState<Task>(data);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -59,7 +59,7 @@ const DialogEditTask = ({ data, handleEditTodoList, id }: DialogEditTaskProps) =
     handleOnOpenChange();
 
     toast({
-      title: 'Successfully!',
+      title: 'Success!',
       description: 'Edit data successfully!',
       duration: 2500
     });

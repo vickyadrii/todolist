@@ -29,7 +29,8 @@ const formSchema = z.object({
       message: 'Title must be at least 2 characters.'
     })
     .max(50),
-  date: z.string()
+  date: z.string(),
+  is_completed: z.boolean()
 });
 
 interface DialogAddTaskProps {
@@ -48,7 +49,8 @@ const DialogAddTask = ({ handleAddTodoList }: DialogAddTaskProps) => {
     defaultValues: {
       id: uuid(),
       title: '',
-      date: ''
+      date: '',
+      is_completed: false
     }
   });
 
@@ -61,7 +63,7 @@ const DialogAddTask = ({ handleAddTodoList }: DialogAddTaskProps) => {
     handleOnOpenChange();
 
     toast({
-      title: 'Successfully!',
+      title: 'Success!',
       description: 'Added data successfully!',
       duration: 2500
     });
@@ -78,7 +80,7 @@ const DialogAddTask = ({ handleAddTodoList }: DialogAddTaskProps) => {
         <DialogHeader>
           <DialogTitle>Add To-Do List</DialogTitle>
         </DialogHeader>
-        <DialogDescription>Adding your to-do list :)</DialogDescription>
+        <DialogDescription>Add your to-do list :)</DialogDescription>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleOnSubmit)} className="flex flex-col gap-4">
             <FormField
