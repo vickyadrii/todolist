@@ -6,8 +6,18 @@ import Header from '@/features/home/Header';
 import ListTasks from '@/features/home/ListTasks';
 import { Task, Weather } from '@/types/types';
 import { useToast } from '@/components/ui/use-toast';
-import DialogAddTask from './DialogAddTask';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { PlusIcon } from '@radix-ui/react-icons';
+import { Button } from '@/components/ui/button';
+import AddTaskForm from './AddTaskForm';
 
 interface HomePageProps {
   dataWeather: Weather;
@@ -18,6 +28,11 @@ const HomePage = ({ dataWeather }: HomePageProps) => {
   const [listTask, setListTask] = useState<Task[]>([]);
   const [keyword, setKeyword] = useState<string>('');
   const [filteredList, setFilteredList] = useState<Task[]>(listTask);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleOnOpenChange = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleAddTodoList = (data: Task) => {
     setListTask([...listTask, data]);
@@ -90,7 +105,23 @@ const HomePage = ({ dataWeather }: HomePageProps) => {
     <div className="max-w-7xl m-auto p-5">
       <Header dataWeather={dataWeather} />
       <div className="p-5 flex items-center justify-between gap-2">
-        <DialogAddTask handleAddTodoList={handleAddTodoList} />
+      <Dialog open={isOpen} onOpenChange={handleOnOpenChange}>
+        <DialogTrigger asChild>
+          <Button size="lg" className="flex items-center gap-1">
+            <PlusIcon /> New Task
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Share Link</DialogTitle>
+          </DialogHeader>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your account and remove your data from our
+            servers.
+          </DialogDescription>
+          <AddTaskForm handleOnOpenChange={handleOnOpenChange} handleAddTodoList={handleAddTodoList} />
+        </DialogContent>
+      </Dialog>
         <Input type="search" onChange={(e) => setKeyword(e.target.value)} className="w-1/5 py-5" placeholder="Search..." />
       </div>
       <ListTasks
