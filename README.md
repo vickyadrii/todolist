@@ -1,7 +1,7 @@
 # Todo-list app
 
 ## Technologies used:
-[![My Skills](https://skillicons.dev/icons?i=react,ts,tailwind)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=next,react,ts,tailwind)](https://skillicons.dev)
 
 ## Getting Started
 
